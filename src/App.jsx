@@ -1,71 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import { getAiAnalysis, getReplySuggestions } from './api/geminiService';
+import { getQualitativeAnalysis, getQuantitativeScores, getReplySuggestions } from './api/geminiService';
 import { MessageIcon, SparklesIcon } from './components/icons.jsx';
 import FriendsTake from './components/FriendsTake.jsx';
 import VibeBar from './components/VibeBar.jsx';
 import Spinner from './components/Spinner.jsx';
 import ReplySuggestionCard from './components/ReplySuggestionCard.jsx';
 import ToggleSwitch from './components/ToggleSwitch.jsx';
-
-// New function to calculate scores based on AI intent
-const calculateMetrics = (intent, intensity) => {
-  const score = intensity * 10;
-  let metrics = {
-    romantic_score: 10,
-    commitment_score: 10,
-    conflict_score: 10,
-    effort_score: 10,
-  };
-
-  switch (intent) {
-    case "High-Conflict":
-      metrics.conflict_score = score;
-      metrics.effort_score = Math.max(50, score - 10); // High conflict is high effort
-      metrics.commitment_score = 20;
-      break;
-    case "Manipulation":
-      metrics.conflict_score = Math.max(60, score); // Manipulation is a form of conflict
-      metrics.effort_score = Math.max(70, score); // Manipulation takes effort
-      metrics.commitment_score = score - 20;
-      break;
-    case "Genuine Apology":
-      metrics.effort_score = Math.max(70, score);
-      metrics.commitment_score = Math.max(60, score);
-      metrics.conflict_score = 30; // Acknowledges past conflict
-      break;
-    case "Affection":
-      metrics.romantic_score = score;
-      metrics.effort_score = Math.max(40, score - 20);
-      metrics.commitment_score = Math.max(40, score - 10);
-      break;
-    case "Seeking Connection":
-      metrics.effort_score = Math.max(50, score);
-      metrics.commitment_score = Math.max(50, score);
-      break;
-    case "Low-Effort Dismissal":
-      metrics.effort_score = Math.min(20, 100 - score); // Inversely related
-      metrics.commitment_score = 10;
-      metrics.romantic_score = 10;
-      break;
-    default:
-      // A fallback for any unexpected intent
-      metrics.effort_score = score;
-      break;
-  }
-  // Clamp scores between 0 and 100
-  for (const key in metrics) {
-    metrics[key] = Math.max(0, Math.min(100, metrics[key]));
-  }
-
-  return [
-    { metric: 'Romantic Vibe', score: metrics.romantic_score, color: 'rose' },
-    { metric: 'Commitment Level', score: metrics.commitment_score, color: 'emerald' },
-    { metric: 'Conflict & Manipulation', score: metrics.conflict_score, color: 'amber' },
-    { metric: 'Effort & Engagement', score: metrics.effort_score, color: 'sky' }
-  ];
-};
-
+import FlaggedQuote from './components/FlaggedQuote.jsx';
 
 export default function App() {
   const [text, setText] = useState('');
@@ -74,28 +16,34 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isReplyLoading, setIsReplyLoading] = useState(false);
   const [error, setError] = useState(null);
-
   const [isSassy, setIsSassy] = useState(true);
   const [isRelationship, setIsRelationship] = useState(false);
 
   const handleGetAnalysis = async (inputText) => {
     if (!inputText.trim()) {
-      setAnalysis(null);
-      setError(null);
-      setSuggestedReplies(null);
-      return;
+      setAnalysis(null); setError(null); setSuggestedReplies(null); return;
     }
-    setIsLoading(true);
-    setError(null);
-    setSuggestedReplies(null);
+    setIsLoading(true); setError(null); setSuggestedReplies(null);
 
     try {
-      const rawAnalysis = await getAiAnalysis(inputText, { isSassy, isRelationship });
+      // Step 1: Get the qualitative analysis
+      const qualitativeData = await getQualitativeAnalysis(inputText, { isSassy, isRelationship });
 
+      // Step 2: Get the quantitative scores based on the summary
+      const scores = await getQuantitativeScores(qualitativeData.summary_for_scorer);
+
+      // Step 3: Combine the results into the final analysis object
       const formattedAnalysis = {
-        status: rawAnalysis.status,
-        explanation: rawAnalysis.explanation,
-        metrics: calculateMetrics(rawAnalysis.primary_intent, rawAnalysis.intensity)
+        status: qualitativeData.status,
+        explanation: qualitativeData.explanation,
+        redFlags: qualitativeData.red_flags,
+        greenFlags: qualitativeData.green_flags,
+        metrics: [
+          { metric: 'Romantic Vibe', score: scores.romantic_score, color: 'rose' },
+          { metric: 'Commitment Level', score: scores.commitment_score, color: 'emerald' },
+          { metric: 'Conflict & Manipulation', score: scores.conflict_score, color: 'amber' },
+          { metric: 'Effort & Engagement', score: scores.effort_score, color: 'sky' }
+        ]
       };
 
       setAnalysis(formattedAnalysis);
@@ -110,12 +58,13 @@ export default function App() {
 
   const handleGetReplies = async () => {
     if (!text || !analysis) return;
-    setIsReplyLoading(true);
-    setError(null);
+    setIsReplyLoading(true); setError(null);
 
     try {
-      const parsedJson = await getReplySuggestions(text, analysis, { isRelationship });
-      setSuggestedReplies(parsedJson.replies);
+      const parsedJson = await getReplySuggestions(text, analysis, { isSassy, isRelationship });
+      // Safety Net: Filter out any replies that are empty or invalid
+      const validReplies = parsedJson.replies.filter(reply => reply && reply.text && reply.text.trim() !== "");
+      setSuggestedReplies(validReplies);
     } catch (err) {
       console.error("Reply generation failed:", err);
       setError("I'm stumped on what to say back. Try analyzing a different text.");
@@ -125,9 +74,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      handleGetAnalysis(text);
-    }, 1200);
+    const handler = setTimeout(() => { handleGetAnalysis(text); }, 1200);
     return () => clearTimeout(handler);
   }, [text, isSassy, isRelationship]);
 
@@ -161,9 +108,19 @@ export default function App() {
                 <div>
                   <FriendsTake status={analysis.status} explanation={analysis.explanation} />
 
-                  {analysis.metrics && analysis.metrics.map((item) => (
-                    <VibeBar key={item.metric} metric={item.metric} score={item.score} color={item.color} />
-                  ))}
+                  {analysis.metrics && analysis.metrics.map((item) => (<VibeBar key={item.metric} {...item} />))}
+
+                  {analysis.greenFlags && analysis.greenFlags.length > 0 && (
+                    <div className="mt-4">
+                      {analysis.greenFlags.map((flag, i) => <FlaggedQuote key={`g-${i}`} {...flag} type="green" />)}
+                    </div>
+                  )}
+
+                  {analysis.redFlags && analysis.redFlags.length > 0 && (
+                    <div className="mt-4">
+                      {analysis.redFlags.map((flag, i) => <FlaggedQuote key={`r-${i}`} {...flag} type="red" />)}
+                    </div>
+                  )}
 
                   {!isReplyLoading && !suggestedReplies && (
                     <button onClick={handleGetReplies} className="w-full mt-4 bg-fuchsia-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-fuchsia-700 transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
@@ -176,7 +133,7 @@ export default function App() {
                   {suggestedReplies && (
                     <div className="mt-6">
                       <h3 className="font-bold text-slate-800 mb-3 text-center">Okay, here's how you could reply:</h3>
-                      {suggestedReplies.map(reply => <ReplySuggestionCard key={reply.type} type={reply.type} text={reply.text} />)}
+                      {suggestedReplies.map(reply => <ReplySuggestionCard key={reply.type} {...reply} />)}
                     </div>
                   )}
 
