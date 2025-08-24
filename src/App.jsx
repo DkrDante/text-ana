@@ -315,6 +315,14 @@ export default function App() {
           </div>
         </div>
       </main>
+
+      {/* Comparison Modal */}
+      {comparisonAnalyses && (
+        <ComparisonView
+          analyses={comparisonAnalyses}
+          onClose={handleCloseComparison}
+        />
+      )}
     </div>
   );
 }
