@@ -25,6 +25,7 @@ export default function App() {
   const [isRelationship, setIsRelationship] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentMobileView, setCurrentMobileView] = useState('input'); // 'input' or 'analysis'
+  const [isTemplateOpen, setIsTemplateOpen] = useState(false);
 
   // Swipe gesture handlers for mobile navigation
   const handleSwipeLeft = () => {
