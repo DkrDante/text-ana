@@ -238,12 +238,14 @@ export default function App() {
                   <SectionDivider label="Next Steps" gradient={true} />
 
                   {!isReplyLoading && !suggestedReplies && (
-                    <button
-                      onClick={handleGetReplies}
-                      className="w-full mt-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-4 rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-purple-500/25 transform hover:-translate-y-0.5 hover:scale-105 ring-1 ring-white/20"
-                    >
-                      <SparklesIcon /> Craft a Reply...
-                    </button>
+                    <div className="mb-6">
+                      <button
+                        onClick={handleGetReplies}
+                        className="w-full mt-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-4 rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-purple-500/25 transform hover:-translate-y-0.5 hover:scale-105 ring-1 ring-white/20"
+                      >
+                        <SparklesIcon /> Craft a Reply...
+                      </button>
+                    </div>
                   )}
 
                   {isReplyLoading && <Spinner text="Thinking of the perfect reply..." />}
