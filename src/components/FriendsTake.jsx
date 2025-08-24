@@ -15,7 +15,13 @@ const FriendsTake = ({ status, explanation }) => {
   return (
     <div className={`p-5 rounded-xl border-2 text-left mb-6 shadow-lg backdrop-blur-sm ring-1 ring-white/10 ${styles[status] || defaultStyle}`}>
       <p className="font-bold text-xl mb-2">{status || "Let's break it down..."}</p>
-      <p className="text-sm font-medium leading-relaxed opacity-90">{explanation || "The signals are a little mixed here, let's look at the details."}</p>
+      <div className="text-sm font-medium leading-relaxed opacity-90">
+        <TypewriterText
+          text={explanation || "The signals are a little mixed here, let's look at the details."}
+          speed={30}
+          delay={500}
+        />
+      </div>
     </div>
   );
 };
