@@ -198,23 +198,48 @@ export default function App() {
                 <div>
                   <FriendsTake status={analysis.status} explanation={analysis.explanation} />
 
-                  {analysis.metrics && analysis.metrics.map((item, index) => (<VibeBar key={item.metric} {...item} index={index} />))}
+                  <SectionDivider label="Relationship Metrics" gradient={true} />
+
+                  <ExpandableSection
+                    title="Vibe Analysis"
+                    icon="📊"
+                    badge={`${analysis.metrics?.length || 0} metrics`}
+                    defaultOpen={true}
+                  >
+                    {analysis.metrics && analysis.metrics.map((item, index) => (<VibeBar key={item.metric} {...item} index={index} />))}
+                  </ExpandableSection>
+
+                  {(analysis.greenFlags?.length > 0 || analysis.redFlags?.length > 0) && (
+                    <SectionDivider label="Key Observations" gradient={true} />
+                  )}
 
                   {analysis.greenFlags && analysis.greenFlags.length > 0 && (
-                    <div className="mt-4">
+                    <ExpandableSection
+                      title="Green Flags"
+                      icon="💚"
+                      badge={`${analysis.greenFlags.length} found`}
+                      defaultOpen={true}
+                    >
                       {analysis.greenFlags.map((flag, i) => <FlaggedQuote key={`g-${i}`} {...flag} type="green" />)}
-                    </div>
+                    </ExpandableSection>
                   )}
 
                   {analysis.redFlags && analysis.redFlags.length > 0 && (
-                    <div className="mt-4">
+                    <ExpandableSection
+                      title="Red Flags"
+                      icon="🚩"
+                      badge={`${analysis.redFlags.length} found`}
+                      defaultOpen={true}
+                    >
                       {analysis.redFlags.map((flag, i) => <FlaggedQuote key={`r-${i}`} {...flag} type="red" />)}
-                    </div>
+                    </ExpandableSection>
                   )}
 
+                  <SectionDivider label="Next Steps" gradient={true} />
+
                   {!isReplyLoading && !suggestedReplies && (
-                    <button 
-                      onClick={handleGetReplies} 
+                    <button
+                      onClick={handleGetReplies}
                       className="w-full mt-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-4 rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-purple-500/25 transform hover:-translate-y-0.5 hover:scale-105 ring-1 ring-white/20"
                     >
                       <SparklesIcon /> Craft a Reply...
@@ -224,10 +249,14 @@ export default function App() {
                   {isReplyLoading && <Spinner text="Thinking of the perfect reply..." />}
 
                   {suggestedReplies && (
-                    <div className="mt-6">
-                      <h3 className="font-bold text-gray-100 mb-3 text-center">Okay, here's how you could reply:</h3>
+                    <ExpandableSection
+                      title="Reply Suggestions"
+                      icon="💬"
+                      badge={`${suggestedReplies.length} options`}
+                      defaultOpen={true}
+                    >
                       {suggestedReplies.map((reply, index) => <ReplySuggestionCard key={`${reply.type}-${index}`} {...reply} />)}
-                    </div>
+                    </ExpandableSection>
                   )}
 
                 </div>
