@@ -7,6 +7,7 @@ import TypewriterText from './components/TypewriterText.jsx';
 import ExpandableSection from './components/ExpandableSection.jsx';
 import SectionDivider from './components/SectionDivider.jsx';
 import MessageTypeIndicator from './components/MessageTypeIndicator.jsx';
+import TemplateSelector from './components/TemplateSelector.jsx';
 import VibeBar from './components/VibeBar.jsx';
 import Spinner from './components/Spinner.jsx';
 import ReplySuggestionCard from './components/ReplySuggestionCard.jsx';
