@@ -169,6 +169,12 @@ export default function App() {
               <ToggleSwitch label="Sassy Friend Mode" isEnabled={isSassy} onToggle={() => setIsSassy(!isSassy)} />
               <ToggleSwitch label="Established Relationship" isEnabled={isRelationship} onToggle={() => setIsRelationship(!isRelationship)} />
             </div>
+            <TemplateSelector
+              onTemplateSelect={handleTemplateSelect}
+              isOpen={isTemplateOpen}
+              onToggle={() => setIsTemplateOpen(!isTemplateOpen)}
+            />
+
             <label htmlFor="text-input" className="text-sm md:text-base font-semibold text-gray-200 mb-2 block">
               Alright, spill. Paste the texts here...
             </label>
