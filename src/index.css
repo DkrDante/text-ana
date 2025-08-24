@@ -52,7 +52,15 @@
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
-  
+
+  .animate-sparkle {
+    animation: sparkle 3s linear infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
   .backdrop-blur-glass {
     backdrop-filter: blur(16px) saturate(180%);
   }
