@@ -204,6 +204,13 @@ export default function App() {
               onToggle={() => setIsTemplateOpen(!isTemplateOpen)}
             />
 
+            <AnalysisHistory
+              onLoadAnalysis={handleLoadAnalysis}
+              onCompareAnalysis={handleCompareAnalysis}
+              isOpen={isHistoryOpen}
+              onToggle={() => setIsHistoryOpen(!isHistoryOpen)}
+            />
+
             <label htmlFor="text-input" className="text-sm md:text-base font-semibold text-gray-200 mb-2 block">
               Alright, spill. Paste the texts here...
             </label>
