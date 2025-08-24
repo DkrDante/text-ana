@@ -42,6 +42,13 @@ export default function App() {
 
   const swipeRef = useSwipeGesture(handleSwipeLeft, handleSwipeRight);
 
+  const handleTemplateSelect = (templateText) => {
+    setText(templateText);
+    setAnalysis(null);
+    setSuggestedReplies(null);
+    setError(null);
+  };
+
   const handleGetAnalysis = async (inputText) => {
     if (!inputText.trim()) {
       setAnalysis(null); setError(null); setSuggestedReplies(null); return;
