@@ -163,11 +163,6 @@ export default function App() {
             <label htmlFor="text-input" className="text-sm md:text-base font-semibold text-gray-200 mb-2 block">
               Alright, spill. Paste the texts here...
             </label>
-            <div className="mb-2 text-xs text-gray-400">
-              {text.length > 0 && (
-                <span>Character count: {text.length} | Estimated reading time: {Math.max(1, Math.ceil(text.length / 200))} min</span>
-              )}
-            </div>
             <textarea 
               id="text-input" 
               value={text} 
