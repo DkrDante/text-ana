@@ -54,6 +54,22 @@ export default function App() {
     setError(null);
   };
 
+  const handleLoadAnalysis = (historyEntry) => {
+    setText(historyEntry.fullText);
+    setAnalysis(historyEntry.analysis);
+    setSuggestedReplies(historyEntry.suggestedReplies);
+    setError(null);
+    setIsHistoryOpen(false);
+  };
+
+  const handleCompareAnalysis = (analyses) => {
+    setComparisonAnalyses(analyses);
+  };
+
+  const handleCloseComparison = () => {
+    setComparisonAnalyses(null);
+  };
+
   const handleGetAnalysis = async (inputText) => {
     if (!inputText.trim()) {
       setAnalysis(null); setError(null); setSuggestedReplies(null); return;
