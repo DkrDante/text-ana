@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSwipeGesture } from './hooks/useSwipeGesture.js';
 import { getQualitativeAnalysis, getQuantitativeScores, getReplySuggestions } from './api/geminiService';
 import { MessageIcon, SparklesIcon } from './components/icons.jsx';
 import FriendsTake from './components/FriendsTake.jsx';
