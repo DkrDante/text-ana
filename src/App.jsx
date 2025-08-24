@@ -21,6 +21,21 @@ export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [currentMobileView, setCurrentMobileView] = useState('input'); // 'input' or 'analysis'
 
+  // Swipe gesture handlers for mobile navigation
+  const handleSwipeLeft = () => {
+    if (window.innerWidth < 768) {
+      setCurrentMobileView('analysis');
+    }
+  };
+
+  const handleSwipeRight = () => {
+    if (window.innerWidth < 768) {
+      setCurrentMobileView('input');
+    }
+  };
+
+  const swipeRef = useSwipeGesture(handleSwipeLeft, handleSwipeRight);
+
   const handleGetAnalysis = async (inputText) => {
     if (!inputText.trim()) {
       setAnalysis(null); setError(null); setSuggestedReplies(null); return;
