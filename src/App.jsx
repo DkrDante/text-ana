@@ -156,7 +156,7 @@ export default function App() {
                   {suggestedReplies && (
                     <div className="mt-6">
                       <h3 className="font-bold text-gray-100 mb-3 text-center">Okay, here's how you could reply:</h3>
-                      {suggestedReplies.map(reply => <ReplySuggestionCard key={reply.type} {...reply} />)}
+                      {suggestedReplies.map((reply, index) => <ReplySuggestionCard key={`${reply.type}-${index}`} {...reply} />)}
                     </div>
                   )}
 
