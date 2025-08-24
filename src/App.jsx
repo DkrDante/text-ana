@@ -195,7 +195,7 @@ export default function App() {
                 <div>
                   <FriendsTake status={analysis.status} explanation={analysis.explanation} />
 
-                  {analysis.metrics && analysis.metrics.map((item) => (<VibeBar key={item.metric} {...item} />))}
+                  {analysis.metrics && analysis.metrics.map((item, index) => (<VibeBar key={item.metric} {...item} index={index} />))}
 
                   {analysis.greenFlags && analysis.greenFlags.length > 0 && (
                     <div className="mt-4">
