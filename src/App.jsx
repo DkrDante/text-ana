@@ -189,7 +189,7 @@ export default function App() {
                 </svg>
               </button>
             </div>
-            <div className="max-h-[70vh] min-h-[400px] overflow-y-auto pr-2">
+            <div className="max-h-[70vh] min-h-[400px] overflow-y-auto pr-2 pb-4">
               {isLoading ? <Spinner text="Okay, reading the texts... gimme a sec." /> : error ? (
                 <div className="flex justify-center items-center h-full text-center text-red-400 p-4 bg-red-900/20 border border-red-500/30 rounded-lg backdrop-blur-sm">
                   <p>{error}</p>
