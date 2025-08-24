@@ -114,41 +114,39 @@ export default function App() {
         <div className="p-6 text-center border-b border-purple-400/20 bg-gradient-to-r from-purple-500/10 to-pink-500/10 relative">
           <button
             onClick={() => window.open('https://whosyashvardhan.com', '_blank')}
-            className="absolute left-4 top-4 flex items-center gap-2 px-3 py-2 bg-gray-700/50 hover:bg-gray-600/50 border border-purple-400/30 rounded-lg text-gray-300 hover:text-white transition-all duration-200 text-sm font-medium backdrop-blur-sm hover:shadow-lg hover:shadow-purple-500/20"
+            className="fixed top-4 left-4 sm:absolute flex items-center gap-2 px-2 py-2 sm:px-3 bg-gray-700/80 hover:bg-gray-600/80 border border-purple-400/30 rounded-full sm:rounded-lg text-gray-300 hover:text-white transition-all duration-200 text-sm font-medium backdrop-blur-sm hover:shadow-lg hover:shadow-purple-500/20 z-50 shadow-lg"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Back to Portfolio
+            <span className="hidden sm:inline">Back to Portfolio</span>
           </button>
           <div className="flex justify-center items-center gap-3">
             <MessageIcon />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              The Text Message Reality Check
+              Mend
             </h1>
           </div>
-          <p className="text-gray-300 mt-2">Your AI friend for decoding confusing texts.</p>
+          <p className="text-gray-300 mt-2">Find clarity and connection in your conversations.</p>
         </div>
 
         {/* Mobile Navigation */}
         <div className="md:hidden flex border-b border-purple-400/20 bg-gray-800/20">
           <button
             onClick={() => setCurrentMobileView('input')}
-            className={`flex-1 py-3 px-4 text-sm font-medium transition-all ${
-              currentMobileView === 'input'
-                ? 'bg-purple-500/20 text-purple-300 border-b-2 border-purple-400'
-                : 'text-gray-400 hover:text-gray-200'
-            }`}
+            className={`flex-1 py-3 px-4 text-sm font-medium transition-all ${currentMobileView === 'input'
+              ? 'bg-purple-500/20 text-purple-300 border-b-2 border-purple-400'
+              : 'text-gray-400 hover:text-gray-200'
+              }`}
           >
             📝 Input Text
           </button>
           <button
             onClick={() => setCurrentMobileView('analysis')}
-            className={`flex-1 py-3 px-4 text-sm font-medium transition-all ${
-              currentMobileView === 'analysis'
-                ? 'bg-purple-500/20 text-purple-300 border-b-2 border-purple-400'
-                : 'text-gray-400 hover:text-gray-200'
-            }`}
+            className={`flex-1 py-3 px-4 text-sm font-medium transition-all ${currentMobileView === 'analysis'
+              ? 'bg-purple-500/20 text-purple-300 border-b-2 border-purple-400'
+              : 'text-gray-400 hover:text-gray-200'
+              }`}
           >
             🔍 Analysis
           </button>
@@ -157,8 +155,8 @@ export default function App() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-0">
           <div className={`md:col-span-3 p-4 md:p-6 ${currentMobileView === 'input' || window.innerWidth >= 768 ? 'block' : 'hidden md:block'}`}>
             <div className="mb-4 p-4 bg-gray-700/30 backdrop-blur-sm rounded-lg border border-purple-400/20 flex flex-col sm:flex-row gap-4 justify-between ring-1 ring-white/5">
-              <ToggleSwitch label="Sassy Friend Mode" isEnabled={isSassy} onToggle={() => setIsSassy(!isSassy)} />
-              <ToggleSwitch label="Established Relationship" isEnabled={isRelationship} onToggle={() => setIsRelationship(!isRelationship)} />
+              <ToggleSwitch label="Diva Mode" isEnabled={isSassy} onToggle={() => setIsSassy(!isSassy)} />
+              <ToggleSwitch label="In a Relationship with them" isEnabled={isRelationship} onToggle={() => setIsRelationship(!isRelationship)} />
             </div>
             <label htmlFor="text-input" className="text-sm md:text-base font-semibold text-gray-200 mb-2 block">
               Alright, spill. Paste the texts here...
@@ -168,11 +166,11 @@ export default function App() {
                 <span>Character count: {text.length} | Estimated reading time: {Math.max(1, Math.ceil(text.length / 200))} min</span>
               )}
             </div>
-            <textarea 
-              id="text-input" 
-              value={text} 
-              onChange={(e) => setText(e.target.value)} 
-              placeholder="Don't hold back. I need the whole conversation to give you the real story." 
+            <textarea
+              id="text-input"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Don't hold back. I need the whole conversation to give you the real story."
               className="w-full h-[300px] md:h-[380px] p-3 md:p-4 border-2 border-gray-600/50 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all duration-200 resize-none text-gray-100 leading-relaxed bg-gray-800/50 backdrop-blur-sm placeholder-gray-400 shadow-inner text-sm md:text-base"
             />
           </div>
@@ -216,7 +214,7 @@ export default function App() {
                   {analysis.greenFlags && analysis.greenFlags.length > 0 && (
                     <ExpandableSection
                       title="Green Flags"
-                      icon="💚"
+                      icon="🌲"
                       badge={`${analysis.greenFlags.length} found`}
                       defaultOpen={true}
                     >
