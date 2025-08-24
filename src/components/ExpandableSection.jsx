@@ -28,7 +28,7 @@ const ExpandableSection = ({ title, children, icon, defaultOpen = true, badge = 
         </svg>
       </button>
       
-      <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-none opacity-100' : 'max-h-0 opacity-0'} ${isOpen ? 'overflow-visible' : 'overflow-hidden'}`}>
+      <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
         <div className="p-4 border-t border-gray-600/20">
           {children}
         </div>
