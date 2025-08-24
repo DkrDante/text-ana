@@ -119,6 +119,11 @@ export default function App() {
       // Safety Net: Filter out any replies that are empty or invalid
       const validReplies = parsedJson.replies.filter(reply => reply && reply.text && reply.text.trim() !== "");
       setSuggestedReplies(validReplies);
+
+      // Update history with reply suggestions
+      if (validReplies.length > 0) {
+        saveAnalysisToHistory(text, analysis, validReplies);
+      }
     } catch (err) {
       console.error("Reply generation failed:", err);
       setError("I'm stumped on what to say back. Try analyzing a different text.");
