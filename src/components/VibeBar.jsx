@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Vibrant neon color mapping for dark theme
 const colorMap = {
