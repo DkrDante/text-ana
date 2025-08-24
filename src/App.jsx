@@ -98,6 +98,9 @@ export default function App() {
       };
 
       setAnalysis(formattedAnalysis);
+
+      // Auto-save to history
+      saveAnalysisToHistory(inputText, formattedAnalysis);
     } catch (err) {
       console.error("Analysis failed:", err);
       setError("Oof, my brain just short-circuited. Try pasting the text again.");
