@@ -17,6 +17,8 @@ export default function App() {
   const [error, setError] = useState(null);
   const [isSassy, setIsSassy] = useState(true);
   const [isRelationship, setIsRelationship] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [currentMobileView, setCurrentMobileView] = useState('input'); // 'input' or 'analysis'
 
   const handleGetAnalysis = async (inputText) => {
     if (!inputText.trim()) {
@@ -108,27 +110,66 @@ export default function App() {
           <p className="text-gray-300 mt-2">Your AI friend for decoding confusing texts.</p>
         </div>
 
+        {/* Mobile Navigation */}
+        <div className="md:hidden flex border-b border-purple-400/20 bg-gray-800/20">
+          <button
+            onClick={() => setCurrentMobileView('input')}
+            className={`flex-1 py-3 px-4 text-sm font-medium transition-all ${
+              currentMobileView === 'input'
+                ? 'bg-purple-500/20 text-purple-300 border-b-2 border-purple-400'
+                : 'text-gray-400 hover:text-gray-200'
+            }`}
+          >
+            📝 Input Text
+          </button>
+          <button
+            onClick={() => setCurrentMobileView('analysis')}
+            className={`flex-1 py-3 px-4 text-sm font-medium transition-all ${
+              currentMobileView === 'analysis'
+                ? 'bg-purple-500/20 text-purple-300 border-b-2 border-purple-400'
+                : 'text-gray-400 hover:text-gray-200'
+            }`}
+          >
+            🔍 Analysis
+          </button>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-5 gap-0">
-          <div className="md:col-span-3 p-6">
+          <div className={`md:col-span-3 p-4 md:p-6 ${currentMobileView === 'input' || window.innerWidth >= 768 ? 'block' : 'hidden md:block'}`}>
             <div className="mb-4 p-4 bg-gray-700/30 backdrop-blur-sm rounded-lg border border-purple-400/20 flex flex-col sm:flex-row gap-4 justify-between ring-1 ring-white/5">
               <ToggleSwitch label="Sassy Friend Mode" isEnabled={isSassy} onToggle={() => setIsSassy(!isSassy)} />
               <ToggleSwitch label="Established Relationship" isEnabled={isRelationship} onToggle={() => setIsRelationship(!isRelationship)} />
             </div>
-            <label htmlFor="text-input" className="text-sm font-semibold text-gray-200 mb-2 block">
+            <label htmlFor="text-input" className="text-sm md:text-base font-semibold text-gray-200 mb-2 block">
               Alright, spill. Paste the texts here...
             </label>
+            <div className="mb-2 text-xs text-gray-400">
+              {text.length > 0 && (
+                <span>Character count: {text.length} | Estimated reading time: {Math.max(1, Math.ceil(text.length / 200))} min</span>
+              )}
+            </div>
             <textarea 
               id="text-input" 
               value={text} 
               onChange={(e) => setText(e.target.value)} 
               placeholder="Don't hold back. I need the whole conversation to give you the real story." 
-              className="w-full h-[380px] p-4 border-2 border-gray-600/50 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all duration-200 resize-none text-gray-100 leading-relaxed bg-gray-800/50 backdrop-blur-sm placeholder-gray-400 shadow-inner"
+              className="w-full h-[300px] md:h-[380px] p-3 md:p-4 border-2 border-gray-600/50 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all duration-200 resize-none text-gray-100 leading-relaxed bg-gray-800/50 backdrop-blur-sm placeholder-gray-400 shadow-inner text-sm md:text-base"
             />
           </div>
 
-          <div className="md:col-span-2 bg-gray-800/20 backdrop-blur-sm p-6 border-t md:border-t-0 md:border-l border-purple-400/20">
-            <h2 className="text-lg font-bold text-gray-100 mb-4 text-center">My Honest Take:</h2>
-            <div className="h-[450px] overflow-y-auto pr-2">
+          <div className={`md:col-span-2 bg-gray-800/20 backdrop-blur-sm p-4 md:p-6 border-t md:border-t-0 md:border-l border-purple-400/20 ${currentMobileView === 'analysis' || window.innerWidth >= 768 ? 'block' : 'hidden md:block'}`}>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-base md:text-lg font-bold text-gray-100">My Honest Take:</h2>
+              <button
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                className="md:hidden p-2 text-gray-400 hover:text-gray-200 transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isSidebarOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+                </svg>
+              </button>
+            </div>
+            <div className="h-[400px] md:h-[450px] overflow-y-auto pr-2">
               {isLoading ? <Spinner text="Okay, reading the texts... gimme a sec." /> : error ? (
                 <div className="flex justify-center items-center h-full text-center text-red-400 p-4 bg-red-900/20 border border-red-500/30 rounded-lg backdrop-blur-sm">
                   <p>{error}</p>
