@@ -1,4 +1,5 @@
 import React from 'react';
+import TypewriterText from './TypewriterText.jsx';
 
 const FriendsTake = ({ status, explanation }) => {
   const styles = {
