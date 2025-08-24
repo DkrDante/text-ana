@@ -106,7 +106,7 @@ export default function App() {
         </div>
       </div>
 
-      <main className="w-full max-w-4xl mx-auto bg-gray-800/30 backdrop-blur-xl shadow-2xl rounded-3xl border border-purple-500/20 overflow-hidden relative z-10 ring-1 ring-white/10">
+      <main ref={swipeRef} className="w-full max-w-4xl mx-auto bg-gray-800/30 backdrop-blur-xl shadow-2xl rounded-3xl border border-purple-500/20 overflow-hidden relative z-10 ring-1 ring-white/10">
         <div className="p-6 text-center border-b border-purple-400/20 bg-gradient-to-r from-purple-500/10 to-pink-500/10 relative">
           <button
             onClick={() => window.open('https://whosyashvardhan.com', '_blank')}
