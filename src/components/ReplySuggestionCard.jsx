@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CopyIcon } from './icons.jsx';
 
 const InfoIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-colors"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-gray-400 group-hover:text-gray-200 transition-colors"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
 );
 
 const ReplySuggestionCard = ({ type, text, rationale }) => {
@@ -21,14 +21,14 @@ const ReplySuggestionCard = ({ type, text, rationale }) => {
   };
 
   const typeStyles = {
-    "Spicy": "from-rose-500 to-orange-500",
-    "Casual": "from-sky-500 to-cyan-400",
-    "Honest": "from-teal-500 to-emerald-500",
+    "Spicy": "from-rose-400 to-orange-400",
+    "Casual": "from-sky-400 to-cyan-400",
+    "Honest": "from-teal-400 to-emerald-400",
   }
-  const defaultTypeStyle = "from-purple-500 to-violet-500";
+  const defaultTypeStyle = "from-purple-400 to-violet-400";
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md border border-slate-200 mb-4">
+    <div className="bg-gray-800/30 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-purple-500/20 mb-4 ring-1 ring-white/10 hover:bg-gray-700/30 transition-all duration-200">
       <div className="flex justify-between items-center mb-2">
         <h4 className={`font-bold text-transparent bg-clip-text bg-gradient-to-r ${typeStyles[type] || defaultTypeStyle}`}>{type}</h4>
         <div className="flex items-center gap-3">
@@ -39,22 +39,21 @@ const ReplySuggestionCard = ({ type, text, rationale }) => {
           >
             <InfoIcon />
             {showRationale && (
-              <div className="absolute bottom-full mb-2 w-48 bg-slate-800 text-white text-xs rounded py-1 px-2 z-10 right-0 transform translate-x-1/2 opacity-100 transition-opacity">
-                <p className="font-bold">The Strategy:</p>
-                {rationale}
+              <div className="absolute bottom-full mb-2 w-48 bg-gray-900/95 backdrop-blur-sm text-gray-200 text-xs rounded-lg py-2 px-3 z-10 right-0 transform translate-x-1/2 opacity-100 transition-opacity border border-purple-500/30 shadow-xl">
+                <p className="font-bold text-purple-300">The Strategy:</p>
+                <p className="mt-1">{rationale}</p>
               </div>
             )}
           </div>
-          <button onClick={handleCopy} className="flex items-center text-sm font-medium text-slate-500 hover:text-slate-800 transition-colors">
+          <button onClick={handleCopy} className="flex items-center text-sm font-medium text-gray-400 hover:text-gray-200 transition-colors">
             <CopyIcon copied={copied} />
             <span className="ml-1.5">{copied ? 'Copied!' : 'Copy'}</span>
           </button>
         </div>
       </div>
-      <p className="text-slate-700 text-sm">{text}</p>
+      <p className="text-gray-200 text-sm leading-relaxed">{text}</p>
     </div>
   );
 };
 
 export default ReplySuggestionCard;
-
