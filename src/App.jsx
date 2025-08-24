@@ -195,7 +195,7 @@ export default function App() {
                   <p>{error}</p>
                 </div>
               ) : analysis ? (
-                <div>
+                <div className="space-y-4 pb-6">
                   <FriendsTake status={analysis.status} explanation={analysis.explanation} />
 
                   <SectionDivider label="Relationship Metrics" gradient={true} />
