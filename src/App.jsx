@@ -11,6 +11,7 @@ import TemplateSelector from './components/TemplateSelector.jsx';
 import AnalysisHistory from './components/AnalysisHistory.jsx';
 import ComparisonView from './components/ComparisonView.jsx';
 import { saveAnalysisToHistory } from './utils/localStorage.js';
+import ExportOptions from './components/ExportOptions.jsx';
 import VibeBar from './components/VibeBar.jsx';
 import Spinner from './components/Spinner.jsx';
 import ReplySuggestionCard from './components/ReplySuggestionCard.jsx';
