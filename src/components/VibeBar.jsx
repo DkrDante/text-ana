@@ -35,24 +35,60 @@ const getScoreFeedback = (score) => {
 };
 
 
-const VibeBar = ({ metric, score, color }) => {
+const VibeBar = ({ metric, score, color, index = 0 }) => {
+  const [animatedScore, setAnimatedScore] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const barColor = colorMap[color] || colorMap['purple'];
   const barGradient = gradientMap[color] || gradientMap['purple'];
   const feedback = getScoreFeedback(score);
 
+  useEffect(() => {
+    // Staggered animation based on index
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, index * 300);
+
+    return () => clearTimeout(timer);
+  }, [index]);
+
+  useEffect(() => {
+    if (isVisible) {
+      // Animate score progression
+      const duration = 1000;
+      const steps = 20;
+      const stepValue = score / steps;
+      let currentStep = 0;
+
+      const interval = setInterval(() => {
+        currentStep++;
+        setAnimatedScore(Math.min(currentStep * stepValue, score));
+
+        if (currentStep >= steps) {
+          clearInterval(interval);
+        }
+      }, duration / steps);
+
+      return () => clearInterval(interval);
+    }
+  }, [isVisible, score]);
+
   return (
-    <div className="mb-5">
+    <div className={`mb-5 transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
       <div className="flex justify-between items-baseline mb-2">
         <p className="text-sm font-semibold text-gray-200">{metric}</p>
-        <p className={`text-xs ${feedback.textColor}`}>{feedback.label}</p>
+        <p className={`text-xs ${feedback.textColor} transition-all duration-300`}>
+          {isVisible ? feedback.label : '...'}
+        </p>
       </div>
-      <div className="w-full bg-gray-700/50 rounded-full h-4 shadow-inner border border-gray-600/30 backdrop-blur-sm">
+      <div className="w-full bg-gray-700/50 rounded-full h-4 shadow-inner border border-gray-600/30 backdrop-blur-sm overflow-hidden">
         <div
-          className={`h-4 rounded-full transition-all duration-700 ease-out shadow-lg ${feedback.pulse ? 'animate-pulse' : ''}`}
+          className={`h-4 rounded-full transition-all duration-1000 ease-out shadow-lg ${feedback.pulse && isVisible ? 'animate-pulse' : ''}`}
           style={{
-            width: `${score}%`,
+            width: `${animatedScore}%`,
             background: barGradient,
-            boxShadow: feedback.pulse ? `0 0 20px ${barColor}` : `0 2px 10px ${barColor}20`
+            boxShadow: feedback.pulse ? `0 0 20px ${barColor}` : `0 2px 10px ${barColor}20`,
+            transform: isVisible ? 'scaleX(1)' : 'scaleX(0)',
+            transformOrigin: 'left'
           }}
         ></div>
       </div>
