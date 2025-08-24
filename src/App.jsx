@@ -89,7 +89,16 @@ export default function App() {
       </div>
 
       <main className="w-full max-w-4xl mx-auto bg-gray-800/30 backdrop-blur-xl shadow-2xl rounded-3xl border border-purple-500/20 overflow-hidden relative z-10 ring-1 ring-white/10">
-        <div className="p-6 text-center border-b border-purple-400/20 bg-gradient-to-r from-purple-500/10 to-pink-500/10">
+        <div className="p-6 text-center border-b border-purple-400/20 bg-gradient-to-r from-purple-500/10 to-pink-500/10 relative">
+          <button
+            onClick={() => window.open('https://whosyashvardhan.com', '_blank')}
+            className="absolute left-4 top-4 flex items-center gap-2 px-3 py-2 bg-gray-700/50 hover:bg-gray-600/50 border border-purple-400/30 rounded-lg text-gray-300 hover:text-white transition-all duration-200 text-sm font-medium backdrop-blur-sm hover:shadow-lg hover:shadow-purple-500/20"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back to Portfolio
+          </button>
           <div className="flex justify-center items-center gap-3">
             <MessageIcon />
             <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
