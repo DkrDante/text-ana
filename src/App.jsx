@@ -252,13 +252,14 @@ export default function App() {
                     <ExpandableSection
                       title="Reply Suggestions"
                       icon="💬"
-                      badge={`${suggestedReplies.length} options`}
+                      badge={`${suggestedReplies.length}💬`}
                       defaultOpen={true}
                     >
-                      {suggestedReplies.map((reply, index) => <ReplySuggestionCard key={`${reply.type}-${index}`} {...reply} />)}
+                      {suggestedReplies.map((reply, index) =>
+                        <ReplySuggestionCard key={`${reply.type}-${index}`} {...reply} />
+                      )}
                     </ExpandableSection>
                   )}
-
                 </div>
               ) : (
                 <div className="flex justify-center items-center h-full text-center text-gray-400 p-8">
