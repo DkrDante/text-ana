@@ -2,22 +2,21 @@ import React from 'react';
 
 const FriendsTake = ({ status, explanation }) => {
   const styles = {
-    "Healthy & Engaged": "bg-emerald-100 text-emerald-900 border-emerald-400",
-    "Potential Situationship": "bg-sky-100 text-sky-900 border-sky-400",
-    "Friendzone Alert": "bg-indigo-100 text-indigo-900 border-indigo-400",
-    "Relationship Disagreement": "bg-amber-100 text-amber-900 border-amber-400",
-    "RED ALERT: You Messed Up": "bg-rose-100 text-rose-900 border-rose-400",
-    "It's Complicated": "bg-slate-100 text-slate-900 border-slate-400"
+    "Healthy & Engaged": "bg-emerald-500/20 text-emerald-300 border-emerald-400/50 shadow-emerald-500/20",
+    "Potential Situationship": "bg-sky-500/20 text-sky-300 border-sky-400/50 shadow-sky-500/20",
+    "Friendzone Alert": "bg-indigo-500/20 text-indigo-300 border-indigo-400/50 shadow-indigo-500/20",
+    "Relationship Disagreement": "bg-amber-500/20 text-amber-300 border-amber-400/50 shadow-amber-500/20",
+    "RED ALERT: You Messed Up": "bg-rose-500/20 text-rose-300 border-rose-400/50 shadow-rose-500/20",
+    "It's Complicated": "bg-gray-500/20 text-gray-300 border-gray-400/50 shadow-gray-500/20"
   };
-  const defaultStyle = "bg-purple-100 text-purple-900 border-purple-400";
+  const defaultStyle = "bg-purple-500/20 text-purple-300 border-purple-400/50 shadow-purple-500/20";
 
   return (
-    <div className={`p-5 rounded-xl border-2 text-left mb-6 shadow-sm ${styles[status] || defaultStyle}`}>
+    <div className={`p-5 rounded-xl border-2 text-left mb-6 shadow-lg backdrop-blur-sm ring-1 ring-white/10 ${styles[status] || defaultStyle}`}>
       <p className="font-bold text-xl mb-2">{status || "Let's break it down..."}</p>
-      <p className="text-sm font-medium leading-relaxed">{explanation || "The signals are a little mixed here, let's look at the details."}</p>
+      <p className="text-sm font-medium leading-relaxed opacity-90">{explanation || "The signals are a little mixed here, let's look at the details."}</p>
     </div>
   );
 };
 
 export default FriendsTake;
-
