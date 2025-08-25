@@ -100,21 +100,21 @@ export default function App() {
   }, [text, isSassy, isRelationship]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 font-sans flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-800 to-blue-900 font-sans flex items-center justify-center p-4 relative overflow-hidden">
       {/* Interactive Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -inset-10 opacity-30">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400 to-purple-600 rounded-full mix-blend-multiply filter blur-xl animate-float hover:scale-110 hover:opacity-40 transition-all duration-1000 cursor-pointer"></div>
-          <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-400 to-pink-600 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000 hover:scale-110 hover:opacity-40 transition-all duration-1000 cursor-pointer"></div>
-          <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000 hover:scale-110 hover:opacity-40 transition-all duration-1000 cursor-pointer"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400 to-cyan-600 rounded-full mix-blend-multiply filter blur-xl animate-float hover:scale-110 hover:opacity-40 transition-all duration-1000 cursor-pointer"></div>
+          <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-gradient-to-r from-teal-400 to-blue-600 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000 hover:scale-110 hover:opacity-40 transition-all duration-1000 cursor-pointer"></div>
+          <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-gradient-to-r from-cyan-400 to-slate-600 rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000 hover:scale-110 hover:opacity-40 transition-all duration-1000 cursor-pointer"></div>
         </div>
       </div>
 
-      <main ref={swipeRef} className="w-full max-w-4xl mx-auto bg-gray-800/30 backdrop-blur-xl shadow-2xl rounded-3xl border border-purple-500/20 overflow-hidden relative z-10 ring-1 ring-white/10">
-        <div className="p-6 text-center border-b border-purple-400/20 bg-gradient-to-r from-purple-500/10 to-pink-500/10 relative">
+      <main ref={swipeRef} className="w-full max-w-4xl mx-auto bg-gray-800/30 backdrop-blur-xl shadow-2xl rounded-3xl border border-blue-500/20 overflow-hidden relative z-10 ring-1 ring-white/10">
+        <div className="p-6 text-center border-b border-blue-400/20 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 relative">
           <button
             onClick={() => window.open('https://whosyashvardhan.com', '_blank')}
-            className="fixed top-4 left-4 sm:absolute flex items-center gap-2 px-2 py-2 sm:px-3 bg-gray-700/80 hover:bg-gray-600/80 border border-purple-400/30 rounded-full sm:rounded-lg text-gray-300 hover:text-white transition-all duration-200 text-sm font-medium backdrop-blur-sm hover:shadow-lg hover:shadow-purple-500/20 z-50 shadow-lg"
+            className="fixed top-4 left-4 sm:absolute flex items-center gap-2 px-2 py-2 sm:px-3 bg-gray-700/80 hover:bg-gray-600/80 border border-blue-400/30 rounded-full sm:rounded-lg text-gray-300 hover:text-white transition-all duration-200 text-sm font-medium backdrop-blur-sm hover:shadow-lg hover:shadow-blue-500/20 z-50 shadow-lg"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -123,7 +123,7 @@ export default function App() {
           </button>
           <div className="flex justify-center items-center gap-3">
             <MessageIcon />
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
               Mend
             </h1>
           </div>
@@ -131,11 +131,11 @@ export default function App() {
         </div>
 
         {/* Mobile Navigation */}
-        <div className="md:hidden flex border-b border-purple-400/20 bg-gray-800/20">
+        <div className="md:hidden flex border-b border-blue-400/20 bg-gray-800/20">
           <button
             onClick={() => setCurrentMobileView('input')}
             className={`flex-1 py-3 px-4 text-sm font-medium transition-all ${currentMobileView === 'input'
-              ? 'bg-purple-500/20 text-purple-300 border-b-2 border-purple-400'
+              ? 'bg-blue-500/20 text-blue-300 border-b-2 border-blue-400'
               : 'text-gray-400 hover:text-gray-200'
               }`}
           >
@@ -144,7 +144,7 @@ export default function App() {
           <button
             onClick={() => setCurrentMobileView('analysis')}
             className={`flex-1 py-3 px-4 text-sm font-medium transition-all ${currentMobileView === 'analysis'
-              ? 'bg-purple-500/20 text-purple-300 border-b-2 border-purple-400'
+              ? 'bg-blue-500/20 text-blue-300 border-b-2 border-blue-400'
               : 'text-gray-400 hover:text-gray-200'
               }`}
           >
@@ -154,7 +154,7 @@ export default function App() {
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-0">
           <div className={`md:col-span-3 p-4 md:p-6 ${currentMobileView === 'input' || window.innerWidth >= 768 ? 'block' : 'hidden md:block'}`}>
-            <div className="mb-4 p-4 bg-gray-700/30 backdrop-blur-sm rounded-lg border border-purple-400/20 flex flex-col sm:flex-row gap-4 justify-between ring-1 ring-white/5">
+            <div className="mb-4 p-4 bg-gray-700/30 backdrop-blur-sm rounded-lg border border-blue-400/20 flex flex-col sm:flex-row gap-4 justify-between ring-1 ring-white/5">
               <ToggleSwitch label="Diva Mode" isEnabled={isSassy} onToggle={() => setIsSassy(!isSassy)} />
               <ToggleSwitch label="In a Relationship with them" isEnabled={isRelationship} onToggle={() => setIsRelationship(!isRelationship)} />
             </div>
@@ -175,7 +175,7 @@ export default function App() {
             />
           </div>
 
-          <div className={`md:col-span-2 bg-gray-800/20 backdrop-blur-sm p-4 md:p-6 border-t md:border-t-0 md:border-l border-purple-400/20 ${currentMobileView === 'analysis' || window.innerWidth >= 768 ? 'block' : 'hidden md:block'}`}>
+          <div className={`md:col-span-2 bg-gray-800/20 backdrop-blur-sm p-4 md:p-6 border-t md:border-t-0 md:border-l border-blue-400/20 ${currentMobileView === 'analysis' || window.innerWidth >= 768 ? 'block' : 'hidden md:block'}`}>
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-base md:text-lg font-bold text-gray-100">My Honest Take:</h2>
               <button
@@ -239,7 +239,7 @@ export default function App() {
                     <div className="mb-6">
                       <button
                         onClick={handleGetReplies}
-                        className="w-full mt-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-4 rounded-lg hover:from-purple-500 hover:to-pink-500 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-purple-500/25 transform hover:-translate-y-0.5 hover:scale-105 ring-1 ring-white/20"
+                        className="w-full mt-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold py-3 px-4 rounded-lg hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-blue-500/25 transform hover:-translate-y-0.5 hover:scale-105 ring-1 ring-white/20"
                       >
                         <SparklesIcon /> Craft a Reply...
                       </button>
