@@ -38,8 +38,8 @@ const getScoreFeedback = (score) => {
 const VibeBar = ({ metric, score, color, index = 0 }) => {
   const [animatedScore, setAnimatedScore] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const barColor = colorMap[color] || colorMap['purple'];
-  const barGradient = gradientMap[color] || gradientMap['purple'];
+  const barColor = colorMap[color] || colorMap['indigo'];
+  const barGradient = gradientMap[color] || gradientMap['rose'];
   const feedback = getScoreFeedback(score);
 
   useEffect(() => {

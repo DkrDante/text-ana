@@ -17,8 +17,8 @@ const MessageTypeIndicator = ({ type, count, percentage }) => {
     long: {
       icon: '📝',
       label: 'Long Messages',
-      color: 'bg-purple-500/20 border-purple-400/50 text-purple-300',
-      barColor: 'bg-gradient-to-r from-purple-500 to-purple-400'
+      color: 'bg-cyan-500/20 border-cyan-400/50 text-blue-300',
+      barColor: 'bg-gradient-to-r from-cyan-500 to-cyan-400'
     },
     short: {
       icon: '💬',
@@ -40,7 +40,7 @@ const MessageTypeIndicator = ({ type, count, percentage }) => {
         <span className="text-xs font-bold">{count}</span>
       </div>
       <div className="w-full bg-gray-700/50 rounded-full h-2">
-        <div 
+        <div
           className={`h-2 rounded-full ${style.barColor} transition-all duration-1000 ease-out`}
           style={{ width: `${percentage}%` }}
         ></div>
