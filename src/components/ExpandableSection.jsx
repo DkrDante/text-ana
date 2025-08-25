@@ -13,7 +13,7 @@ const ExpandableSection = ({ title, children, icon, defaultOpen = true, badge = 
           {icon && <span className="text-lg">{icon}</span>}
           <h3 className="font-semibold text-gray-200">{title}</h3>
           {badge && (
-            <span className="px-2 py-1 bg-purple-500/20 text-purple-300 text-xs rounded-full border border-purple-400/30">
+            <span className="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded-full border border-blue-400/30">
               {badge}
             </span>
           )}

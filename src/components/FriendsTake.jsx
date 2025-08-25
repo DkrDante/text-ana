@@ -10,7 +10,7 @@ const FriendsTake = ({ status, explanation }) => {
     "RED ALERT: You Messed Up": "bg-rose-500/20 text-rose-300 border-rose-400/50 shadow-rose-500/20",
     "It's Complicated": "bg-gray-500/20 text-gray-300 border-gray-400/50 shadow-gray-500/20"
   };
-  const defaultStyle = "bg-purple-500/20 text-purple-300 border-purple-400/50 shadow-purple-500/20";
+  const defaultStyle = "bg-blue-500/20 text-blue-300 border-blue-400/50 shadow-blue-500/20";
 
   return (
     <div className={`p-5 rounded-xl border-2 text-left mb-6 shadow-lg backdrop-blur-sm ring-1 ring-white/10 ${styles[status] || defaultStyle}`}>
