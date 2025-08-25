@@ -25,10 +25,10 @@ const ReplySuggestionCard = ({ type, text, rationale }) => {
     "Casual": "from-sky-400 to-cyan-400",
     "Honest": "from-teal-400 to-emerald-400",
   }
-  const defaultTypeStyle = "from-purple-400 to-violet-400";
+  const defaultTypeStyle = "from-blue-400 to-cyan-400";
 
   return (
-    <div className="bg-gray-800/30 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-purple-500/20 mb-4 ring-1 ring-white/10 hover:bg-gray-700/30 transition-all duration-200">
+    <div className="bg-gray-800/30 backdrop-blur-sm p-4 rounded-lg shadow-lg border border-blue-500/20 mb-4 ring-1 ring-white/10 hover:bg-gray-700/30 transition-all duration-200">
       <div className="flex justify-between items-center mb-2">
         <h4 className={`font-bold text-transparent bg-clip-text bg-gradient-to-r ${typeStyles[type] || defaultTypeStyle}`}>{type}</h4>
         <div className="flex items-center gap-3">
@@ -39,8 +39,8 @@ const ReplySuggestionCard = ({ type, text, rationale }) => {
           >
             <InfoIcon />
             {showRationale && (
-              <div className="absolute bottom-full mb-2 w-48 bg-gray-900/95 backdrop-blur-sm text-gray-200 text-xs rounded-lg py-2 px-3 z-10 right-0 transform translate-x-1/2 opacity-100 transition-opacity border border-purple-500/30 shadow-xl">
-                <p className="font-bold text-purple-300">The Strategy:</p>
+              <div className="absolute bottom-full mb-2 w-48 bg-gray-900/95 backdrop-blur-sm text-gray-200 text-xs rounded-lg py-2 px-3 z-10 right-0 transform translate-x-1/2 opacity-100 transition-opacity border border-blue-500/30 shadow-xl">
+                <p className="font-bold text-blue-300">The Strategy:</p>
                 <p className="mt-1">{rationale}</p>
               </div>
             )}
