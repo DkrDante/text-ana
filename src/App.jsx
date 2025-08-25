@@ -252,7 +252,7 @@ export default function App() {
                     <ExpandableSection
                       title="Reply Suggestions"
                       icon="💬"
-                      badge={`${suggestedReplies.length}💬`}
+                      badge={`${suggestedReplies.length} 💬`}
                       defaultOpen={true}
                     >
                       {suggestedReplies.map((reply, index) =>
